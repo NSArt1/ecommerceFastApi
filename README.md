@@ -1,2 +1,2 @@
 # ecommerceFastApi
-Учебный pet-проект на Python Fastapi цифрового интернет-магазина
+* Учебный pet-проект на Python Fastapi цифрового интернет-магазина
