@@ -1,17 +1,21 @@
-from backend.db import Base
-from sqlalchemy import Column, ForeignKey, String, Boolean, Integer
+from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
 from sqlalchemy.orm import relationship
-from sqlalchemy.schema import CreateTable
-import os
-import sys
 
-# sys.path.append(os.getcwd())
+from app.backend.db import Base
+from app.models.products import Product
+
+
 class Category(Base):
     __tablename__ = 'categories'
-    
+    __table_args__ = {'extend_existing': True} 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
-    slug = Column(String, unique = True, index =True)
+    slug = Column(String, unique=True, index=True)
     is_active = Column(Boolean, default=True)
+
+    products = relationship("Product", back_populates="category")
+    parent_id = Column(Integer, ForeignKey('categories.id'), nullable=True)
     
-print(CreateTable(Category.__table__))
+# from sqlalchemy.schema import CreateTable
+# print(CreateTable(Product.__table__))
+# print(CreateTable(Category.__table__))
